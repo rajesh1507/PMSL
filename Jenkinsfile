@@ -6,7 +6,7 @@ pipeline {
       steps {
         sh '''
                     python --version
-                    echo "Hello world"
+                    echo "Hello world \${GIT_URL}"
             '''
       }
     }
