@@ -10,5 +10,13 @@ pipeline {
             '''
       }
     }
+    stage ('Check-Git-Secrets') {
+      steps {
+        sh 'whoami'
+        sh 'rm trufflehog || true'
+        sh 'docker run gesellix/trufflehog --json \${GIT_URL} > trufflehog'
+        sh 'cat trufflehog'
+      }
+    }
   }
 }
