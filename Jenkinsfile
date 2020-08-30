@@ -5,7 +5,7 @@ pipeline {
     stage ('Initialize') {
       steps {
         sh '''
-                    echo "${python3 --version}"
+                    python3 --version
                     echo "Hello world"
             '''
       }
