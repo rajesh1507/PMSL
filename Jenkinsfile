@@ -25,6 +25,7 @@ pipeline {
         sh 'cat trufflehog'
         script {
             if (runShell('grep \'reason\' trufflehog')) {
+                error("Secrets found in git repo: ${GIT_URL}")
                 sh "exit 1"
             }
         }    
