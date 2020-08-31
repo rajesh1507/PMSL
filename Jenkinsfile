@@ -2,20 +2,23 @@ pipeline {
   agent any
   stages {
 
-    stage ('Initialize') {
-      steps {
-        sh '''
+    node('test'){
+      stage ('Initialize') {
+        steps {
+          sh '''
                     python --version
                     echo "Hello world \${GIT_URL}"
-            '''
+             '''
+        }
       }
-    }
-    stage ('Check-Git-Secrets') {
-      steps {
-        sh 'whoami'
-        sh 'rm trufflehog || true'
-        sh 'docker run gesellix/trufflehog --json \${GIT_URL} > trufflehog'
-        sh 'cat trufflehog'
+
+      stage ('Check-Git-Secrets') {
+        steps {
+          sh 'whoami'
+          sh 'rm trufflehog || true'
+          sh 'docker run gesellix/trufflehog --json \${GIT_URL} > trufflehog'
+          sh 'cat trufflehog'
+        }
       }
     }
   }
