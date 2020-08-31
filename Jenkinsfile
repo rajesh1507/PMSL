@@ -1,3 +1,9 @@
+def runShell(String command){
+    def responseCode = sh returnStatus: true, script: "${command} &> tmp.txt"
+    def output =  readFile(file: "tmp.txt")
+    return (output != "")
+}
+
 pipeline {
   agent any
   stages {
@@ -17,6 +23,9 @@ pipeline {
         sh 'rm trufflehog || true'
         sh 'docker run gesellix/trufflehog --json \${GIT_URL} > trufflehog'
         sh 'cat trufflehog'
+        if (runShell('grep \'error\' trufflehog')) {
+          sh "exit 1"
+        }    
       }
     }
   }
