@@ -11,6 +11,7 @@ pipeline {
       }
     }
     stage ('Check-Git-Secrets') {
+      agent { label 'node-with-docker' }
       steps {
         sh 'whoami'
         sh 'rm trufflehog || true'
