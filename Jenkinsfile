@@ -2,7 +2,7 @@ pipeline {
   agent any
   stages {
 
-    node('test'){
+    node('node-with-docker'){
       stage ('Initialize') {
         steps {
           sh '''
