@@ -24,7 +24,7 @@ pipeline {
         sh 'docker run gesellix/trufflehog --json \${GIT_URL} > trufflehog'
         sh 'cat trufflehog'
         script {
-            if (runShell('grep \'error\' trufflehog')) {
+            if (runShell('grep \'reason\' trufflehog')) {
                 sh "exit 1"
             }
         }    
