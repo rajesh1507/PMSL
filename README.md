@@ -1,3 +1,0 @@
-# PMSL
-
-password: rajesh
