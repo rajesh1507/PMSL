@@ -22,7 +22,7 @@ pipeline {
       steps {
         sh 'whoami'
         sh 'rm trufflehog || true'
-        sh 'docker run gesellix/trufflehog --json \${GIT_URL} > trufflehog'
+        sh 'docker run --rm gesellix/trufflehog --json \${GIT_URL} > trufflehog'
         sh 'cat trufflehog'
         script {
             if (runShell('grep \'reason\' trufflehog')) {
